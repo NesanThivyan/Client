@@ -1,9 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 export default function ServiceScreen() {
-  const navigate = useNavigate();
-
   return (
     <div className="min-h-screen flex flex-col">
       {/* Top Half (Plain) */}
@@ -12,7 +9,7 @@ export default function ServiceScreen() {
       </div>
 
       {/* Bottom Half (Gradient) */}
-      <div className="h-[50vh] bg-gradient-to-b from-[#23607E] via-[#0F6B99] via-30% to-[#221160] py-12 flex flex-col justify-center items-center">
+      <div className="h-[50vh] bg-gradient-to-b from-[#23607E] via-[#0F6B99] via-30% to-[#221160] py-12 flex justify-center items-center">
         <div className="flex flex-row justify-center items-center gap-10 px-4 transform translate-y-[-60%] translate-x-[1%] shadow-xl">
           {[
             {
@@ -39,15 +36,6 @@ export default function ServiceScreen() {
               <div className="h-4 rounded-full w-full mt-4"></div>
             </div>
           ))}
-        </div>
-        {/* Explore More Button */}
-        <div className="flex justify-center mt-10 transform translate-y-[-250%]">
-          <button
-            className="bg-[#180B50] text-white px-8 py-3 rounded-full shadow-lg hover:bg-[#0F6B99] transition text-lg font-semibold"
-            onClick={() => navigate("/userscreen")}
-          >
-            Explore More
-          </button>
         </div>
       </div>
     </div>
