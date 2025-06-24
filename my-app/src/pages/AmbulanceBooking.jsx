@@ -1,75 +1,76 @@
-import React from 'react';
-import ambulanceImg from './assets/ambulance.png'; // Replace with actual image path
+import React from "react";
+import ambulanceImg from "../images/Ambu2.png";
+import bgImg from "../images/Ambulance2.jpg";
 
-export default function AmbulanceBooking() {
+export default function AmbulanceBooking({ onClose }) {
   return (
-    <div className="min-h-screen bg-[#EDEDED] flex flex-col">
-      {/* Navbar */}
-      <header className="bg-[#140038] text-white px-6 py-4 flex justify-between items-center">
-        <div className="flex items-center space-x-2">
-          <img src="/logo.svg" alt="Logo" className="h-6" />
-          <span className="font-bold text-lg">AlertX</span>
-        </div>
-        <div className="flex items-center space-x-4">
-          <button className="text-white">Link</button>
-          <div className="w-8 h-8 bg-purple-300 rounded-full flex items-center justify-center">
-            <span className="text-sm">👤</span>
-          </div>
-        </div>
-      </header>
+    <div
+      className="min-h-screen w-full flex items-center justify-center bg-cover bg-center bg-fixed relative"
+      style={{
+        backgroundImage: `url(${bgImg})`,
+      }}
+    >
+      <div className="bg-white shadow-xl rounded-lg flex w-full max-w-4xl overflow-hidden relative z-10">
+        {/* Left Section - Illustration */}
+       <div className="w-1/2 bg-gray-100 flex items-center justify-center p-4">
+       <img
+         src={ambulanceImg}
+         alt="Ambulance Illustration"
+         className="w-full max-w-5xl object-contain transform translate-x-[40%] translate-y-[40%]"
+        />
+       </div>
 
-      {/* Main Section */}
-      <div className="flex-1 flex flex-col md:flex-row items-center justify-center px-6 py-12">
-        {/* Left Image */}
-        <div className="hidden md:block md:w-1/2">
-          <img src={ambulanceImg} alt="Ambulance" className="max-h-[400px]" />
-        </div>
+        {/* Right Section - Booking Form */}
+        <div className="w-1/2 p-6 flex items-center justify-center">
+          <div className="w-full max-w-sm bg-white/80 backdrop-blur-md p-6 rounded-xl shadow-xl">
+            <div className="w-full md:w-1/2 max-w-md bg-white rounded-2xl shadow-2xl p-8">
+            <h2 className="text-xl font-semibold text-center mb-4 text-gray-800">
+              Ambulance Booking
+            </h2>
 
-        {/* Right Form */}
-        <div className="w-full md:w-1/2 max-w-lg bg-white rounded-2xl shadow-2xl p-8">
-          <h2 className="text-2xl font-bold text-center text-[#140038] mb-6">Ambulance Booking</h2>
-          <form className="space-y-4 text-sm font-medium text-gray-700">
-            <div>
-              <label>Name</label>
+            <form className="space-y-3">
               <input
                 type="text"
-                className="w-full mt-1 px-4 py-2 bg-[#FFF3F3] rounded-md shadow-sm focus:outline-none"
+                placeholder="Name"
+                className="w-full px-3 py-1.5 border border-gray-300 rounded shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-            </div>
-            <div>
-              <label>Hospital</label>
               <input
                 type="text"
-                className="w-full mt-1 px-4 py-2 bg-[#FFF3F3] rounded-md shadow-sm focus:outline-none"
+                placeholder="Hospital"
+                className="w-full px-3 py-1.5 border border-gray-300 rounded shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-            </div>
-            <div className="flex space-x-4">
-              <div className="w-1/2">
-                <label>Date</label>
+              <div className="flex gap-2">
                 <input
                   type="date"
-                  className="w-full mt-1 px-4 py-2 bg-[#FFF3F3] rounded-md shadow-sm focus:outline-none"
+                  className="w-1/2 px-3 py-1.5 border border-gray-300 rounded shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-              </div>
-              <div className="w-1/2">
-                <label>Time</label>
                 <input
                   type="time"
-                  className="w-full mt-1 px-4 py-2 bg-[#FFF3F3] rounded-md shadow-sm focus:outline-none"
+                  className="w-1/2 px-3 py-1.5 border border-gray-300 rounded shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
-            </div>
-            <div>
-              <label>Patient Condition / Other</label>
               <textarea
-                rows="3"
-                className="w-full mt-1 px-4 py-2 bg-[#FFF3F3] rounded-md shadow-sm focus:outline-none"
+                placeholder="Patient Condition / Other"
+                rows={2}
+                className="w-full px-3 py-1.5 border border-gray-300 rounded shadow-sm text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
               ></textarea>
-            </div>
 
-            {/* Gradient Bar */}
-            <div className="h-3 mt-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-700"></div>
-          </form>
+              <button
+                type="submit"
+                className="w-full py-1.5 text-sm rounded bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold hover:from-indigo-600 hover:to-purple-600"
+              >
+                Book Now
+              </button>
+              <button
+                type="button"
+                onClick={onClose}
+                className="w-full py-1.5 text-sm rounded bg-gray-200 text-gray-700 font-semibold hover:bg-gray-300"
+              >
+                Cancel
+              </button>
+            </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>

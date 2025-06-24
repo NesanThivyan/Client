@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Signin from "../images/signin1.png";
 import api from "../api/axios";
+
 export default function SignUpScreen() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -24,8 +27,9 @@ export default function SignUpScreen() {
       });
 
       setMessage("Signup successful!");
-      console.log("Signup response:", res.data);
-      // Optional: Redirect to login or homepage
+      setTimeout(() => {
+        navigate("/userdetails");
+      }, 5000);
     } catch (error) {
       const errMsg =
         error.response?.data?.message || "Signup failed. Try again.";
@@ -44,7 +48,7 @@ export default function SignUpScreen() {
         <div className="w-1/2 bg-gray-100 flex items-center justify-center p-6">
           <img
             src={Signin}
-            alt="Ambulance Illustration"
+            alt="Sign In Illustration"
             className="w-full max-w-sm"
           />
         </div>

@@ -1,34 +1,29 @@
-// CaretakerServices.jsx
-import React from 'react';
-import { Button } from '@/components/ui/button'; // Optional if you're using a UI library
-import elderlyImage from './assets/elderly.png'; // Replace with your image path
+import React from "react";
+import Caretakers from "../images/care.png";
+import bgImg from "../images/Ambulance2.jpg";
 
-export default function CaretakerServices() {
+export default function AmbulanceBooking({ onClose }) {
   return (
-    <div className="min-h-screen bg-[#EDEDED] flex flex-col">
-      {/* Navbar */}
-      <header className="bg-[#140038] text-white px-6 py-4 flex justify-between items-center">
-        <div className="flex items-center space-x-2">
-          <img src="/logo.svg" alt="Logo" className="h-6" /> {/* Replace with your logo */}
-          <span className="font-bold text-lg">AlertX</span>
-        </div>
-        <div className="flex items-center space-x-6">
-          <button className="text-white">Link</button>
-          <div className="w-8 h-8 bg-purple-300 rounded-full flex items-center justify-center">
-            <span className="text-sm">👤</span>
-          </div>
-        </div>
-      </header>
+    <div
+      className="min-h-screen w-full flex items-center justify-center bg-cover bg-center bg-fixed relative"
+      style={{
+        backgroundImage: `url(${bgImg})`,
+      }}
+    >
+      <div className="bg-white shadow-xl rounded-lg flex w-full max-w-4xl overflow-hidden relative z-10 translate-y-[2%]">
+        {/* Left Section - Illustration */}
+       <div className="w-1/2 bg-gray-100 flex items-center justify-center p-4">
+       <img
+         src={Caretakers}
+         alt="Ambulance Illustration"
+         className="w-full max-w-5xl object-contain transform translate-x-[30%] translate-y-[30%]"
+        />
+       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center px-6 py-12">
-        {/* Left Image */}
-        <div className="w-1/2 hidden md:flex justify-center">
-          <img src={elderlyImage} alt="Elderly and caretaker" className="max-h-[400px]" />
-        </div>
-
-        {/* Services Card */}
-        <div className="w-full md:w-1/2 max-w-md bg-white rounded-2xl shadow-2xl p-8">
+        {/* Right Section - Booking Form */}
+        <div className="w-1/2 p-6 flex items-center justify-center">
+          <div className="w-full max-w-sm bg-white/80 backdrop-blur-md p-6 rounded-xl shadow-xl">
+             <div className="w-full md:w-1/2 max-w-md bg-white rounded-2xl shadow-2xl p-8">
           <h2 className="text-2xl font-bold text-center text-[#140038] mb-6">
             Caretakers Services
           </h2>
@@ -47,8 +42,10 @@ export default function CaretakerServices() {
           {/* Book Now Button */}
           <div className="mt-6 text-center">
             <button className="px-6 py-2 bg-[#CDB4FF] text-white font-semibold rounded-md hover:bg-[#bca3f2] transition">
-              📅 Book Now
+              Book Now
             </button>
+          </div>
+        </div>
           </div>
         </div>
       </div>

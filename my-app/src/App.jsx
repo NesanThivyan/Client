@@ -10,6 +10,7 @@ import IntroScreenTrigger from "./pages/IntroScreen";
 import Contact from './pages/Contact';
 import Feedback from './pages/feedback';
 import UserScreen from './pages/UserScreen';
+import UserDetailsForm from './pages/UserDetail';
 import axios from 'axios';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/userscreen" element={<UserScreen />} />
+        <Route path="/userdetails" element={<UserDetailsForm />} />
         {/* Add more routes as needed */}
       </Routes>
     </BrowserRouter>
