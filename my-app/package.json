@@ -11,6 +11,7 @@
   },
   "proxy": "http://localhost:3000",
   "dependencies": {
+    "jwt-decode": "^4.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

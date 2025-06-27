@@ -11,7 +11,15 @@ import Contact from './pages/Contact';
 import Feedback from './pages/feedback';
 import UserScreen from './pages/UserScreen';
 import UserDetailsForm from './pages/UserDetail';
+import UserMedical from './pages/UserMedical';
+import Admindashboard from './dashboards/Admindashboard'
+import Footer from './components/footer';
+import UserDashboard from './pages/Profile';
+import UserGuardians from './pages/UserGuardians';
 import axios from 'axios';
+
+
+
 
 function App() {
   useEffect(() => {
@@ -38,8 +46,13 @@ function App() {
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/userscreen" element={<UserScreen />} />
         <Route path="/userdetails" element={<UserDetailsForm />} />
+        <Route path="/usermedical" element={<UserMedical />} />
+        <Route path="/admindashboard" element={<Admindashboard />} />
+        <Route path="/profile" element={<UserDashboard />} />
+        <Route path="/userguardian" element={<UserGuardians />} />
         {/* Add more routes as needed */}
       </Routes>
+    
     </BrowserRouter>
   )
 }

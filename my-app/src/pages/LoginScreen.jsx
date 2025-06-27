@@ -9,25 +9,28 @@ export default function LoginPage() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setMessage("");
+const handleLogin = async (e) => {
+  e.preventDefault();
+  setMessage("");
 
-    try {
-      const response = await api.post("/auth/signin", {
-        email,
-        password,
-      });
+  try {
+    const response = await api.post("/auth/signin", {
+      email,
+      password,
+    });
 
-      setMessage("Login successful!");
-      console.log("Login Response:", response.data);
-      navigate("/userscreen");
-    } catch (error) {
-      const errMsg =
-        error.response?.data?.message || "Login failed. Please try again.";
-      setMessage(errMsg);
-    }
-  };
+    // Save token to localStorage
+    localStorage.setItem("token", response.data.token);
+
+    setMessage("Login successful!");
+    console.log("Login Response:", response.data);
+    navigate("/userscreen");
+  } catch (error) {
+    const errMsg =
+      error.response?.data?.message || "Login failed. Please try again.";
+    setMessage(errMsg);
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white relative">
