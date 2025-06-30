@@ -1,13 +1,15 @@
 import React from "react";
-
+import pro1 from "../images/profile2.jpeg"; 
+import pro2 from "../images/profile3.jpeg";
+import pro3 from "../images/profiles.png";
 function TestimonialCard({ name, title, comment, avatar, stars }) {
   return (
     <div className="relative flex items-start w-[350px] bg-white rounded-2xl shadow-lg p-4 overflow-visible">
       {/* Blue bar — straight, positioned top-left, shifted outside slightly */}
       <div
         className="
-          absolute -top-4 -left-4       /* push outside top-left corner */
-          w-[220px] h-[70px]           /* size of the blue bar */
+          absolute -top-4 -left-4      
+          w-[220px] h-[70px]         
           bg-indigo-800
           rounded-tl-3xl rounded-br-3xl rounded-tr-lg
           z-0
@@ -33,7 +35,7 @@ function TestimonialCard({ name, title, comment, avatar, stars }) {
       </div>
 
       <img
-        src={avatar}
+        src={pro1 || pro2 || pro3}
         alt={name}
         className="w-16 h-16 rounded-full object-cover border-4 border-white shadow-md absolute top-2 right-2 z-20"
       />
@@ -48,7 +50,7 @@ export default function ThreeFeedbackCards() {
       title: "Paramedic",
       comment:
         "Great service! The ambulance arrived quickly and the staff was very professional.",
-      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+      img: { pro1 },
       stars: 5,
     },
     {
@@ -56,7 +58,7 @@ export default function ThreeFeedbackCards() {
       title: "Doctor",
       comment:
         "Easy to use app and very helpful in emergencies. Highly recommended!",
-      avatar: "https://randomuser.me/api/portraits/women/65.jpg",
+      img: { pro3 },
       stars: 5,
     },
     {
@@ -64,7 +66,7 @@ export default function ThreeFeedbackCards() {
       title: "Caretaker",
       comment:
         "Caretaker service was excellent. Thank you for your support.",
-      avatar: "https://randomuser.me/api/portraits/men/74.jpg",
+      img: { pro2 },
       stars: 4,
     },
   ];

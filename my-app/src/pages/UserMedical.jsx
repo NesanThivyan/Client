@@ -1,11 +1,9 @@
-// UserMedicalScreen.jsx
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
-import Signin from "../images/signin1.png"; // illustration (reuse)
+import Signin from "../images/signp.png";
 
-export default function UserMedical() {
-  // local state for the medical fields
+export default function UserMedicalScreen() {
   const [medical, setMedical] = useState({
     bloodGroup: "",
     allergies: "",
@@ -14,91 +12,93 @@ export default function UserMedical() {
     weight: "",
     treatments: "",
   });
-
-  // if you passed the basic user details from the previous screen,
-  // you can grab them here (optional)
-  const { state: userDetails } = useLocation();
+  const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState("");
 
   const navigate = useNavigate();
 
-  /* -------- handlers -------- */
+  // Remove the useEffect with auth guard here
+
   const handleChange = (e) =>
-    setMedical({ ...medical, [e.target.name]: e.target.value });
+    setMedical((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMsg("");
 
-    // you might merge basic + medical and send in one request:
-    // const payload = { ...userDetails, ...medical };
-    // await api.post("/userdetails", payload);
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("userId");
 
-    await api.post("/user/medical", medical);
+      await api.post(`/user/${userId}/medical`, medical, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-    console.table(medical); // TEMP: confirm in console
-
-    // go to the next step
-    navigate("/userguardian", { state: { ...userDetails, ...medical } });
+      navigate("/guardian");
+    } catch (err) {
+      setMsg(err.response?.data?.message || "Unable to save medical details");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  /* ---------- UI ---------- */
   return (
     <div className="min-h-screen flex items-center justify-center bg-white relative">
       {/* top gradient strip */}
       <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-l from-[#23607E] via-[#0F6B99] to-[#221160] z-0" />
 
-      {/* card */}
       <div className="relative z-10 flex w-full max-w-5xl shadow-2xl rounded-xl overflow-hidden">
         {/* illustration */}
         <div className="w-1/2 bg-gray-100 flex items-center justify-center p-6">
-          <img src={Signin} alt="Illustration" className="w-full max-w-sm" />
+          <img src={Signin} alt="Illustration" className="w-full max-w-xl transition translate-x-[5%] translate-y-[10%]" />
         </div>
 
         {/* medical form */}
         <div className="w-1/2 flex items-center justify-center p-4">
           <form
             onSubmit={handleSubmit}
-            className="relative z-10 bg-white rounded-3xl shadow-lg p-8 w-[90%] max-w-md space-y-4"
+            className="bg-white rounded-3xl shadow-lg p-8 w-[90%] max-w-md space-y-4"
           >
             <h2 className="text-center font-semibold text-lg">
-              User Medical Details
+              Medical Details
             </h2>
 
             {[
-              { label: "Blood Group", name: "bloodGroup", type: "text" },
-              { label: "Allergies", name: "allergies", type: "text" },
-              { label: "Sugar Level", name: "sugarLevel", type: "text" },
-              { label: "Pressure", name: "pressure", type: "text" },
-              { label: "Weight", name: "weight", type: "text" },
-              { label: "Treatments", name: "treatments", type: "text" },
-            ].map(({ label, name, type }) => (
+              { label: "Blood Group", name: "bloodGroup" },
+              { label: "Allergies", name: "allergies" },
+              { label: "Sugar Level", name: "sugarLevel" },
+              { label: "Pressure", name: "pressure" },
+              { label: "Weight", name: "weight" },
+              { label: "Treatments", name: "treatments" },
+            ].map(({ label, name }) => (
               <div key={name} className="flex flex-col">
-                <label
-                  htmlFor={name}
-                  className="text-sm font-medium text-gray-700 mb-1"
-                >
+                <label htmlFor={name} className="text-sm font-medium mb-1">
                   {label}
                 </label>
                 <input
                   id={name}
                   name={name}
-                  type={type}
                   value={medical[name]}
                   onChange={handleChange}
                   placeholder={`Enter ${label}`}
                   required
-                  className="bg-gray-100 px-4 py-2 rounded-md shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="bg-gray-100 px-4 py-2 rounded-md shadow-sm text-sm focus:ring-2 focus:ring-blue-500"
                 />
               </div>
             ))}
 
-            <div className="flex justify-center pt-2">
-              <button
-                type="submit"
-                className="px-6 py-2 rounded-full bg-blue-900 text-white shadow-md hover:opacity-90"
-              >
-                Next
-              </button>
-            </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-full py-2 rounded-full text-white shadow-md transition ${
+                loading ? "bg-blue-400 cursor-not-allowed" : "bg-blue-900 hover:opacity-90"
+              }`}
+            >
+              {loading ? "Saving…" : "Next"}
+            </button>
+
+            {msg && <p className="text-center text-red-600 mt-2">{msg}</p>}
           </form>
         </div>
       </div>

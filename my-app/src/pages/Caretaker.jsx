@@ -1,5 +1,5 @@
 import React from "react";
-import Caretakers from "../images/care.png";
+import Caretakers from "../images/Ambulan.jpg";
 import bgImg from "../images/Ambulance2.jpg";
 
 export default function AmbulanceBooking({ onClose }) {
@@ -16,7 +16,7 @@ export default function AmbulanceBooking({ onClose }) {
        <img
          src={Caretakers}
          alt="Ambulance Illustration"
-         className="w-full max-w-5xl object-contain transform translate-x-[30%] translate-y-[30%]"
+         className="w-full max-w-7xl object-contain transform translate-x-[30%] translate-y-[1%]"
         />
        </div>
 

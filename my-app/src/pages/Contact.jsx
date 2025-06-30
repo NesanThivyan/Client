@@ -19,9 +19,6 @@ export default function Contact() {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center px-4 py-10 bg-[#f8f9fc] overflow-hidden">
-      {/* Background Glow Effects */}
-     
-
       {/* Contact Form */}
       <div className="relative z-10 bg-white rounded-3xl shadow-2xl w-full max-w-lg p-8 sm:p-10">
         <div className="mb-6 text-center">

@@ -1,36 +1,57 @@
 import React, { useState } from "react";
-import api from "../api/axios";            
+import api from "../api/axios";
 import ambulanceImg from "../images/Ambu2.png";
 import bgImg from "../images/Ambulance2.jpg";
 
 export default function AmbulanceBooking({ onClose }) {
   const [formData, setFormData] = useState({
-    name: "",
-    hospital: "",
-    date: "",
-    time: "",
-    condition: "",
+    pickupLocation: "",
+    dropoffLocation: "",
+    emergencyType: "",
+    patientName: "",
+    patientAge: "",
+    patientCondition: "",
+    contactNumber: "",
+    date: "", 
+    hospital: "", 
+    bookingName: "",
   });
 
+  // Handle change for all form inputs
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === "patientAge" ? Number(value) : value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    
+    const dataToSend = {
+      pickupLocation: formData.pickupLocation,
+      dropoffLocation: formData.dropoffLocation,
+      emergencyType: formData.emergencyType,
+      patientName: formData.patientName,
+      patientAge: formData.patientAge,
+      patientCondition: formData.patientCondition,
+      contactNumber: formData.contactNumber,
+      date: formData.date, 
+      hospital: formData.hospital,
+      name: formData.bookingName,
+    };
+
     try {
-      // combine date + time into one Date object
-      const { date, time, ...rest } = formData;
-      const bookingDate = new Date(`${date}T${time}:00`);
-
-      // POST through our configured api instance
-      await api.post("/bookings", { ...rest, date: bookingDate });
-
+      // You can log the data being sent to verify
+      console.log("Sending booking data:", dataToSend);
+      await api.post("/bookings", dataToSend);
       alert("Booking successful!");
       onClose();
     } catch (error) {
-      console.error("Booking Error:", error);
-      alert("Failed to book. Please try again.");
+      console.error("Booking Error:", error.response?.data || error.message);
+      alert(error.response?.data?.message || "Failed to book. Please try again.");
     }
   };
 
@@ -57,53 +78,113 @@ export default function AmbulanceBooking({ onClose }) {
               Ambulance Booking
             </h2>
 
+          
             <input
               type="text"
-              name="name"
-              placeholder="Name"
-              value={formData.name}
+              name="pickupLocation"
+              placeholder="Pickup Location"
+              value={formData.pickupLocation}
               onChange={handleChange}
               className="w-full px-3 py-1.5 border rounded shadow-sm text-sm focus:ring-2 focus:ring-blue-500"
+              required
+            />
+
+            <input
+              type="text"
+              name="dropoffLocation"
+              placeholder="Dropoff Location"
+              value={formData.dropoffLocation}
+              onChange={handleChange}
+              className="w-full px-3 py-1.5 border rounded shadow-sm text-sm focus:ring-2 focus:ring-blue-500"
+              required
+            />
+
+            <input
+              type="text"
+              name="emergencyType"
+              placeholder="Emergency Type"
+              value={formData.emergencyType}
+              onChange={handleChange}
+              className="w-full px-3 py-1.5 border rounded shadow-sm text-sm focus:ring-2 focus:ring-blue-500"
+              required
+            />
+
+            <input
+              type="text"
+              name="patientName"
+              placeholder="Patient Name"
+              value={formData.patientName}
+              onChange={handleChange}
+              className="w-full px-3 py-1.5 border rounded shadow-sm text-sm focus:ring-2 focus:ring-blue-500"
+              required
+            />
+
+            <input
+              type="number"
+              name="patientAge"
+              placeholder="Patient Age"
+              value={formData.patientAge}
+              onChange={handleChange}
+              className="w-full px-3 py-1.5 border rounded shadow-sm text-sm focus:ring-2 focus:ring-blue-500"
+              required
+              min={0}
+            />
+
+            <input
+              type="text"
+              name="patientCondition"
+              placeholder="Patient Condition"
+              value={formData.patientCondition}
+              onChange={handleChange}
+              className="w-full px-3 py-1.5 border rounded shadow-sm text-sm focus:ring-2 focus:ring-blue-500"
+              required
+            />
+
+            <input
+              type="text"
+              name="contactNumber"
+              placeholder="Contact Number"
+              value={formData.contactNumber}
+              onChange={handleChange}
+              className="w-full px-3 py-1.5 border rounded shadow-sm text-sm focus:ring-2 focus:ring-blue-500"
+              required
+            />
+
+          
+            <input
+              type="date" 
+              name="date"
+              placeholder="Booking Date"
+              value={formData.date}
+              onChange={handleChange}
+              className="w-full px-3 py-1.5 border rounded shadow-sm text-sm focus:ring-2 focus:ring-blue-500"
+              required 
             />
 
             <input
               type="text"
               name="hospital"
-              placeholder="Hospital"
+              placeholder="Target Hospital"
               value={formData.hospital}
               onChange={handleChange}
               className="w-full px-3 py-1.5 border rounded shadow-sm text-sm focus:ring-2 focus:ring-blue-500"
+              required
             />
 
-            <div className="flex gap-2">
-              <input
-                type="date"
-                name="date"
-                value={formData.date}
-                onChange={handleChange}
-                className="w-1/2 px-3 py-1.5 border rounded shadow-sm text-sm focus:ring-2 focus:ring-blue-500"
-              />
-              <input
-                type="time"
-                name="time"
-                value={formData.time}
-                onChange={handleChange}
-                className="w-1/2 px-3 py-1.5 border rounded shadow-sm text-sm focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <textarea
-              name="condition"
-              placeholder="Patient Condition / Other"
-              rows={2}
-              value={formData.condition}
+            <input
+              type="text"
+              name="bookingName" 
+              placeholder="Requester Name / Booking Name"
+              value={formData.bookingName}
               onChange={handleChange}
-              className="w-full px-3 py-1.5 border rounded shadow-sm text-sm resize-none focus:ring-2 focus:ring-blue-500"
-            ></textarea>
+              className="w-full px-3 py-1.5 border rounded shadow-sm text-sm focus:ring-2 focus:ring-blue-500"
+              required
+            />
+            {/* ------------------------- */}
 
             <button
               type="submit"
-              className="w-full py-1.5 text-sm rounded bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold hover:from-indigo-600 hover:to-purple-600"
+              className="w-full py-1.5 text-sm rounded bg-blue-600 text-white font-semibold hover:from-indigo-600 hover:to-purple-600"
             >
               Book Now
             </button>

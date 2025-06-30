@@ -11,6 +11,7 @@ export default function ServiceScreen() {
   const [showChatBox, setShowChatBox] = useState(false);
 
   return (
+    <div>
     <div className="min-h-screen flex flex-col">
       {/* Top Half (Fixed Background Image) */}
       <div
@@ -82,6 +83,7 @@ export default function ServiceScreen() {
         )}
       </div>
     </div>
+    </div>
   );
 }
 
@@ -100,5 +102,6 @@ function ServiceCard({ emoji, label, buttonText, onClick }) {
         {buttonText}
       </button>
     </div>
+    
   );
 }

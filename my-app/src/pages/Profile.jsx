@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-/**
- * Dashboard with tab-based sidebar.  
- * – "User Details" tab contains an editable form.  
- * – "User Medical Details" tab shows medical data (editable scaffold).  
- * Extend the same idea for Guardian & Settings panels.  
- */
+
 export default function UserDashboard() {
-  const [activeTab, setActiveTab] = useState("user"); // user | medical | guardian | settings
+  const [activeTab, setActiveTab] = useState("user"); 
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -42,7 +37,7 @@ export default function UserDashboard() {
 
   return (
     <div className="flex min-h-screen bg-gray-200">
-      {/* ▓▓ Sidebar ▓▓ */}
+      {/* Sidebar */}
       <aside className="w-1/5 bg-blue-900 rounded-r-xl shadow-md p-4 flex flex-col gap-4">
         <TabButton id="user">User Details</TabButton>
         <TabButton id="medical">User Medical Details</TabButton>
@@ -50,7 +45,7 @@ export default function UserDashboard() {
         <TabButton id="settings">Settings</TabButton>
       </aside>
 
-      {/* ▓▓ Main ▓▓ */}
+      {/*  Main */}
       <main className="flex-1 bg-blue-50 p-10 rounded-l-xl shadow-inner overflow-auto">
         {activeTab === "user" && (
           <UserDetailsPanel

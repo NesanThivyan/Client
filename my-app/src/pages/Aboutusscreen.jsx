@@ -13,16 +13,16 @@ export default function AboutHero() {
 
       {/* Framed content card */}
       <div className="relative z-10 border-4 bg-white/90 backdrop-blur-5sm shadow-xl rounded-lg px-8 md:px-10 py-12 md:py-16 max-w-3xl ">
-       <h2 className="text-4xl md:text-5xl font-bold text-[#0D1276] mb-9">About us</h2>
+       <h2 className="text-4xl md:text-5xl font-bold text-[#0D1276] mb-9" style={{ fontFamily: "Georgia" }}>About us</h2>
         <p className="text-gray-700 leading-relaxed text-lg">
-          <span className="font-semibold">"
-          Your Lifeline in Emergencies — Fast, Reliable, and Smart"</span><br />
+          <span className="font-semibold" style={{ fontFamily: "serif" }}>
+            Your Lifeline in Emergencies — Fast, Reliable, and Smart
+          <br />
           CareX is an emergency ambulance service app designed to save precious time. With just one tap, instantly alert nearby hospitals and ambulance centers with your live location. Whether for you or a loved one, help is always within reach.
+          </span>
         </p>
 
-        <button className="mt-10 bg-[#0D1276] hover:bg-[#12A2FD] transition-colors duration-300 text-white font-semibold tracking-wide rounded-full px-8 py-3">
-          Learn more
-        </button>
+        
       </div>
 
       {/* Ambulance hero image overlapping the card */}

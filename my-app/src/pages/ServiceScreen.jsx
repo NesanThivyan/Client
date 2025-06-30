@@ -12,29 +12,29 @@ export default function ServiceScreen() {
   const cards = [
     {
       title: "24/7 Ambulance",
-      desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      desc: "LThe ambulance booking system lets users request emergency transport instantly with just a few clicks. It ensures a fast response by connecting them to the nearest available ambulance.",
       img: Ambulance,
     },
     {
       title: "Care Takers",
-      desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      desc: "Caretakers provide essential support to patients by assisting with daily activities and ensuring their well-being. They play a vital role in offering comfort, safety, and continuous care, especially during recovery.",
       img: CareTaker,
     },
     {
       title: "Talk with Hospital",
-      desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      desc: "The chat feature allows users to communicate directly with hospitals for quick support and information. It helps in resolving queries, booking services, and receiving real-time assistance.",
       img: Hospital,
     },
   ];
 
   return (
     <section className="min-h-screen flex flex-col items-center py-16 bg-white">
-      {/* ─── Section heading ─────────────────────────────── */}
+      {/* ─── Section heading ──────── */}
       <h2 className="text-2xl font-semibold text-gray-800 mb-12">
         3 Reasons To Choose Us
       </h2>
 
-      {/* ─── Card row ────────────────────────────────────── */}
+      {/* ─── Card row ──────*/}
       <div className="flex flex-wrap justify-center gap-10 px-4">
         {cards.map((card, idx) => (
           <div
@@ -65,7 +65,7 @@ export default function ServiceScreen() {
         ))}
       </div>
 
-      {/* ─── CTA button ──────────────────────────────────── */}
+  
       <button
         onClick={() => navigate("/userscreen")}
         className="mt-12 bg-[#0F6B99] text-white px-8 py-3 rounded-full shadow-lg
